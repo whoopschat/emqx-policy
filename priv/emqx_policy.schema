@@ -1,0 +1,23 @@
+%%%---------------------------------------------------
+%% API
+%%%---------------------------------------------------
+
+{mapping, "emqx_policy.api.url", "emqx_policy.api", [
+  {default, undefined},
+  {datatype, string}
+]}.
+
+{mapping, "emqx_policy.api.method", "emqx_policy.api", [
+  {default, post},
+  {datatype, {enum, [post, get]}}
+]}.
+
+{mapping, "emqx_policy.api.server_key", "emqx_policy.api", [
+  {datatype, string}
+]}.
+
+{translation, "emqx_policy.api", fun(Conf) ->
+  [{url, cuttlefish:conf_get("emqx_policy.api.url", Conf)},
+  {method, cuttlefish:conf_get("emqx_policy.api.method", Conf)},
+  {server_key, cuttlefish:conf_get("emqx_policy.api.server_key", Conf)}]
+end}.
